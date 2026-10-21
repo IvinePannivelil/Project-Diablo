@@ -1,0 +1,66 @@
+# Virtual environments & dependencies
+venv/
+env/
+ENV/
+.venv/
+
+# Python byte-code and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables, credentials, and keys
+.env
+.env.*
+*.key
+*.pem
+*.cert
+*.pfx
+
+# Model weights and large binaries
+models/*
+!models/.gitkeep
+*.gguf
+*.bin
+*.safetensors
+*.pt
+*.onnx
+
+# Runtime databases, memory vectors, logs, and backups
+memory/*
+!memory/.gitkeep
+logs/*
+!logs/.gitkeep
+backups/*
+!backups/.gitkeep
+
+# Staging review queue & runtime staged files
+staging/*
+!staging/.gitkeep
+
+# User dropzone & organized personal files
+dropzone/*
+!dropzone/.gitkeep
+organized_files/*
+!organized_files/.gitkeep
+
+# Generated personal documents and exports
+generated_docs/*
+!generated_docs/.gitkeep
+
+# Runtime cached media
+ui/assets/cache_audio/*
+!ui/assets/cache_audio/.gitkeep
+ui/assets/anime_voices/*
+!ui/assets/anime_voices/.gitkeep
+
+# Operating system artifacts
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+*.tmp

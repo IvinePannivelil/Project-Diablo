@@ -1,0 +1,65 @@
+# Project Diablo — Blueprint v4 (Finalized)
+
+A local, privacy-first personal AI assistant running entirely on Ivine's laptop (i7, 24GB RAM, RTX 4060), built with Python + llama.cpp. (Formerly called "Project Jarvis.")
+
+## The 11 Prime Directives
+1. **Zero Harm** — No destructive system commands. No running unverified downloads. Any self-written code runs in a sandbox first, never directly on the system.
+2. **Absolute Consent (Air-Gap Rule)** — No data leaves the laptop without manual confirmation, per action, every time. No "approve all."
+3. **Total Localization** — All models, files, and memory stay on-device.
+4. **Staged Learning** — Anything Diablo learns on his own (research, transcripts, auto-sorted files) sits in a review queue before it's permanently saved to memory.
+5. **Resource Governance** — Diablo never runs more than the hardware can handle at once; heavy features queue and unload each other automatically.
+6. **Reversibility & Audit Trail** — Every action (file moves, system changes, memory writes) is logged and can be undone.
+7. **Fail-Safe by Default** — If unsure or in error, Diablo stops and asks rather than guessing.
+8. **Emergency Override** — One command/hotkey instantly halts everything and puts Diablo into an idle, read-only state.
+9. **Backup & Recovery** — Memory database and settings back up on a schedule.
+10. **No Persona Overreach** — A toggled-off feature is fully inactive, never runs "just in case."
+11. **Self-Contained Environment** — Diablo operates entirely within his own dedicated folder (e.g. `D:\MY Ideas\Project_Diablo`) plus a short whitelist of user folders (Downloads, Documents, Desktop, Dropzone). Core system directories are structurally inaccessible. Everything — code, models, memory, logs, staging area — lives in this one root folder.
+
+## Core Architecture
+Built and running locally on the RTX 4060 laptop for now. Extending Diablo to other laptops (a GTX 1650 and an RTX 3050 machine) is a future consideration, not part of this build — since a cloud/hybrid API on weaker hardware would conflict with Rules 2 and 3 as written, it's parked until it can be designed as its own clearly-labeled, separately-consented exception.
+
+## The Features
+
+### 1. Persona & Interface
+- **Listening (STT)**: Windows built-in speech recognition — tested, accurate enough for casual use.
+- **Safety read-back**: Before executing any voice command, Diablo reads back what he heard ("You said: open the Q3 report — do that?") to catch mis-transcriptions.
+- **Talking (TTS)**: Windows built-in voice — tested and confirmed working well. No voice cloning.
+- **Avatar**: Simple 2D reactive face/HUD — no 3D (no projector/headset available).
+- **Text-Only Fallback**: When the GPU is busy, Diablo drops the avatar/voice and answers via text using a lightweight model.
+
+### 2. File Organization & Retrieval (RAG)
+- **Omniscient RAG Memory**: Retrieve files by meaning.
+- **Automated Organizer**: Moves files into a staging folder first, giving an undo window.
+- **Scheduled Re-indexing**: Keeps memory from going stale.
+
+### 3. Agentic Web & Professional Automation
+- **Web Form Filling**: Asks permission; manual "Submit" click required.
+- **Professional Automation**: Drafts LinkedIn posts / GitHub commits; manual "Approve" required.
+- **Self-Directed Learning & Swarm**: Autonomous research can use a small number of background sub-agents (capped at 2 running at once, to stay within Rule 5's resource limits), applies a source-trust filter, and sends findings into the Staged Learning review queue rather than saving them directly.
+
+### 4. Productivity & Work Companions
+- **Focus & Tutor Mode**: Generates a study schedule, blocks distractions, includes Emergency Override.
+- **Pair Programming Buddy**: Writes scripts, explains code, reads terminal errors (junior dev assistant, not autonomous architect).
+- **Meeting Secretary**: Requires a manual start per meeting. Produces transcript, summary, and action items.
+- **Action Log**: Tracks what Diablo suggested vs. what was accepted.
+
+### 5. Advanced System Integrations
+- **Screen Awareness (Vision)**: Takes a screenshot and analyzes it only when explicitly asked.
+- **PC & System Control**: Restricted to a fixed allow-list (`set_volume`, `set_brightness`, `lock_screen`, `open_app` from an approved list, `sleep_mode`).
+- **Resource Manager (automatic)**: Checks GPU memory before loading a heavy feature, unloading anything idle first.
+- **Performance Profiles (manual, new)**: A settings dashboard — like the graphics-quality presets in a game — with modes such as Power Saver / Balanced / Max Performance. Each preset caps how much CPU/GPU/RAM Diablo is allowed to use and which heavy features (avatar, voice, vision) are permitted at that level. The automatic Resource Manager still handles moment-to-moment switching, but only within whatever ceiling the selected profile allows.
+- **The Infinite Diary**: Daily journal of productivity.
+- **Email & Calendar Digest**: Secure local connection for morning briefings.
+
+### 6. Document & Office File Creation/Editing
+- **Create New Files**: Local LLM writes content for Word, Excel, PDFs; code libraries handle formatting.
+- **Content Sourcing**: Uses existing background info, asks for missing details. Does not invent data.
+- **Edit Existing Files**: Works on a copy in the staging folder. Only replaces the actual file after your approval.
+
+### 7. Testing & Reliability
+- **Eval Set**: Small set of test tasks run after code changes, to catch regressions.
+- **Memory Version Tracking**: Roll back the memory database if bad data gets written.
+
+## Status
+Rules and features finalized for the single-laptop build. Multi-laptop support is a deferred future phase. Next step: convert this into a phased coding checklist (recommended starting slice: local LLM chat + RAG memory + voice I/O).
+
